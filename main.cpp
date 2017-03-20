@@ -44,7 +44,8 @@ int main(int argc, char **argv) {
 	printf("%ux%u tiles, %u argc.\n", w, h, argc);
 	u8 * const data = (u8 *) calloc(w * 8 * h * 8, 3);
 
-	const u32 dw = w * 8 * 3;
+	const u32 dwtile = w * 8 * 3 * 8;
+	const u32 dwrow = w * 8 * 3;
 	u32 t = 0;
 	for (i = 2; i < (u32) argc - 1; i++, t++) {
 		Fl_BMP_Image img(argv[i]);
@@ -65,7 +66,7 @@ int main(int argc, char **argv) {
 		const u32 col = t % w;
 
 		for (y = 0; y < 8; y++) {
-			memcpy(data + row * dw + col * 8 * 3,
+			memcpy(data + row * dwtile + y * dwrow + col * 8 * 3,
 				src + y * 8 * 3, 8 * 3);
 		}
 	}
