@@ -4,7 +4,7 @@
 #include <lrtypes.h>
 
 static void savepng(const u8 * const data, FILE * const f, const u32 w, const u32 h) {
-return;
+
 	png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 	if (!png_ptr) abort();
 	png_infop info = png_create_info_struct(png_ptr);
@@ -78,6 +78,7 @@ int main(int argc, char **argv) {
 
 	savepng(data, f, w * 8, h * 8);
 
+	free(data);
 	fclose(f);
 	return 0;
 }
